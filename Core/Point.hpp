@@ -9,7 +9,7 @@ namespace GeomCPP
 {
 
     template <typename T, size_t Dim>
-        requires point_numeric<T>
+        requires point_numeric<T> 
     class Point
     {
     public:
@@ -75,6 +75,16 @@ namespace GeomCPP
             return std::sqrt(dist);
         }
 
+        point operator/(const T scalar) const 
+        {
+            if (scalar==0) throw std::runtime_error("Division by zero");
+
+            point result = *this;
+            for (size_t counter=0; counter<Dim; ++counter) result.coordinates[counter]= coordinates[counter]/scalar;
+
+            return result ;
+        }
+
         template <valid_scalar ScalarType>
         void scale(ScalarType scalar)
         {
@@ -102,6 +112,7 @@ namespace GeomCPP
                                (p2[1] - p1[1]) * (p3[0] - p1[0]);
             return std::abs(determinant) < 1e-9;
         }
+
     };
 
 } // namespace GeomCPP
