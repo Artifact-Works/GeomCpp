@@ -78,6 +78,11 @@ public:
         return std::sqrt(dist); 
     }
 
+    T magnitude() const
+    { 
+        return distance(point{std::array<T, Dim>{}});
+    }
+
     template <valid_scalar ScalarType> 
     void scale(ScalarType scalar) { 
         for (auto &coord : coordinates) 

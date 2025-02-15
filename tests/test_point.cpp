@@ -106,3 +106,33 @@ TEST(PointTest, GetDimensions) {
     EXPECT_EQ(p.get_dimensions(), 2);
 }
 
+TEST(PointTest,MagnitudeZero2D){
+	Point2D p({0.0,0.0});
+	EXPECT_EQ(p.magnitude(),0.0);
+}
+
+TEST(PointTest,MagnitudeZero3D){
+	Point3D p({0.0,0.0,0.0});
+	EXPECT_EQ(p.magnitude(),0.0);
+}
+
+TEST(PointTest,MagnitudePositive){
+	Point2D p({120,200});
+	EXPECT_EQ(p.magnitude(),233.23807579381202);
+}
+
+TEST(PointTest,MagnitudeNegative){
+	Point2D p({-120,-200});
+	EXPECT_EQ(p.magnitude(),233.23807579381202);
+}
+
+TEST(PointTest,MagnitudePositive3D){
+	Point3D p({120,200,500});
+	EXPECT_EQ(p.magnitude(),551.72456896534891);
+}
+
+TEST(PointTest,MagnitudeNegative3D){
+	Point3D p({-120,-200,-500});
+	EXPECT_EQ(p.magnitude(),551.72456896534891);
+}
+
