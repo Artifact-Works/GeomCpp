@@ -78,16 +78,6 @@ public:
         return std::sqrt(dist); 
     }
 
-    point operator/(const T scalar) const 
-    {
-        if (scalar==0) throw std::runtime_error("Division by zero");
-
-        point result = *this;
-        for (size_t counter=0; counter<Dim; ++counter) result.coordinates[counter]= coordinates[counter]/scalar;
-
-        return result ;
-    }
-
     Point<T, Dim> reflect(const Point<T, Dim>& line_point1, const Point<T, Dim>& line_point2) const
     requires (Dim ==2 )
     {
