@@ -94,6 +94,44 @@ public:
             coord *= scalar; 
     }
 
+    Point<T, Dim> reflect(const Point<T, Dim>& line_point1, const Point<T, Dim>& line_point2) const
+    requires (Dim ==2 )
+    {
+        point result = *this;
+
+        double a = line_point2.coordinates[1] - line_point1.coordinates[1];
+        double b = line_point1.coordinates[0] - line_point2.coordinates[0];
+        double c = line_point2.coordinates[0]*line_point1.coordinates[1] - line_point1.coordinates[0]*line_point2.coordinates[1];
+
+        result.coordinates[0] = coordinates[0]- (2*a*(a*coordinates[0]+b*coordinates[1]+c))/(a*a+b*b);
+        result.coordinates[1] = coordinates[1]- (2*b*(a*coordinates[0]+b*coordinates[1]+c))/(a*a+b*b);
+
+        return result;
+    }
+
+    Point<T, Dim> reflect(const Point<T, Dim>& plane_point, const Point<T, Dim>& plane_normal) const
+    requires (Dim==3)
+    {
+        point result = *this ;
+        
+        double x_coordinate = plane_point.coordinates[0];
+        double y_coordinate = plane_point.coordinates[1];
+        double z_coordinate = plane_point.coordinates[2];
+
+        double a = plane_normal.coordinates[0];
+        double b = plane_normal.coordinates[1];
+        double c = plane_normal.coordinates[2];
+        double d = -(a*x_coordinate+b*y_coordinate+c*z_coordinate);
+
+        double factor = (a*coordinates[0]+b*coordinates[1]+c*coordinates[2]+d)/(a*a+b*b+c*c);
+
+        result.coordinates[0] = coordinates[0] - 2 * factor * a;
+        result.coordinates[1] = coordinates[1] - 2 * factor * b;
+        result.coordinates[2] = coordinates[2] - 2 * factor * c;
+
+        return result ;
+    }
+
     void print() const { 
         std::cout << "("; 
         for (size_t i = 0; i < Dim; ++i) { 
