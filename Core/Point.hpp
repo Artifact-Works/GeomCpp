@@ -79,7 +79,12 @@ public:
     return std::sqrt(dist);
   }
 
+  bool approx_equal(const Point<T, Dim>& other, T epsilon = 1e-9) const {
+    return distance(other) <= epsilon;
+  }
+
   T magnitude() const { return distance(point{std::array<T, Dim>{}}); }
+
   point operator/(const T scalar) const {
     if (scalar == 0)
       throw std::runtime_error("Division by zero");
