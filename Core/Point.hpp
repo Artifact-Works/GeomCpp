@@ -182,7 +182,12 @@ public:
     auto determinant =
         (p2[0] - p1[0]) * (p3[1] - p1[1]) - (p2[1] - p1[1]) * (p3[0] - p1[0]);
     return std::abs(determinant) < 1e-9;
-  }
-};
 
-} // namespace GeomCPP
+    static Point<T, Dim> lerp(const Point<T, Dim>& p1, const Point<T, Dim>& p2, T t) {
+      Point<T, Dim> result;
+      for (std::size_t i = 0; i < Dim; ++i) {
+          result[i] = p1[i] + t * (p2[i] - p1[i]);
+      }
+      return result;
+  }
+}; // namespace GeomCPP
