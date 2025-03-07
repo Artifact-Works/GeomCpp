@@ -288,3 +288,13 @@ TEST(PointTest, ProjectionOntoDegenerateLine) {
 
   EXPECT_THROW(p.project_onto_line(line_p1, line_p2), std::runtime_error);
 }
+
+TEST(PointTest, LerpFunction) {
+  GeomCPP::Point<double, 2> p1 = {{0.0, 0.0}};
+  GeomCPP::Point<double, 2> p2 = {{10.0, 10.0}};
+
+  GeomCPP::Point<double, 2> midPoint = GeomCPP::Point<double, 2>::lerp(p1, p2, 0.5);
+
+  EXPECT_DOUBLE_EQ(midPoint[0], 5.0);
+  EXPECT_DOUBLE_EQ(midPoint[1], 5.0);
+}
