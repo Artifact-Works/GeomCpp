@@ -298,3 +298,12 @@ TEST(PointTest, LerpFunction) {
   EXPECT_DOUBLE_EQ(midPoint[0], 5.0);
   EXPECT_DOUBLE_EQ(midPoint[1], 5.0);
 }
+// Test for scalar multiplication of a Point object
+TEST(PointTest, ScalarMultiplication) {
+  Point<double, 3> p1 = {1.0, 2.0, 3.0};
+  Point<double, 3> p2 = p1 * 2.0;
+
+  EXPECT_DOUBLE_EQ(p2.coords[0], 2.0);
+  EXPECT_DOUBLE_EQ(p2.coords[1], 4.0);
+  EXPECT_DOUBLE_EQ(p2.coords[2], 6.0);
+}
