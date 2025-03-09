@@ -165,6 +165,14 @@ public:
     return line_point1 + AB * factor;
   }
 
+  //Added operator*
+  Point<T, Dim> operator*(T scalar) const {
+    Point<T, Dim> result;
+    for (size_t i = 0; i < Dim; ++i) {
+        result.coords[i] = this->coords[i] * scalar;
+    }
+    return result;
+}
 
   void print() const {
     std::cout << "(";
